@@ -1,6 +1,6 @@
-﻿namespace AspNetCoreMvc_eTicaret_MovieSales.Entities
+﻿namespace AspNetCoreMvc_eTicaret_MovieSales.ViewModels
 {
-    public class Movie      //Film
+    public class MovieViewModel
     {
         public int Id { get; set; }
         public string? Name { get; set; }
@@ -14,9 +14,6 @@
         public bool IsLocal { get; set; }  //Yerli-Yabancı
         public bool IsPopuler { get; set; }
         public int GenreId { get; set; }
-
-        //Navigation Property (Relations)
-        public Genre Genre { get; set; }
-        public List<MovieSaleDetail> MovieSaleDetails { get; set; }
+        //public string Details { get; set; }
     }
 }

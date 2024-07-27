@@ -9,10 +9,6 @@
 
   <ItemGroup>
     <Folder Include="Extensions\" />
-    <Folder Include="Mapping\" />
-    <Folder Include="ViewComponents\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>

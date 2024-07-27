@@ -23,10 +23,10 @@
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Anasayfa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Movie" asp-action="Local">Yerli</a>
+                            <a class="nav-link" asp-area="" asp-controller="Movie" asp-action="Local" asp-route-isLocal="True">Yerli</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Movie" asp-action="Local">Yabancı</a>
+                            <a class="nav-link" asp-area="" asp-controller="Movie" asp-action="Local" asp-route-isLocal="False">Yabancı</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Movie" asp-action="Populer">Popüler</a>

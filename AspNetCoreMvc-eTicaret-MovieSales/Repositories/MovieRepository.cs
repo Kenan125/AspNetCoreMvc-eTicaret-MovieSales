@@ -1,7 +1,6 @@
 ﻿using AspNetCoreMvc_eTicaret_MovieSales.Data;
 using AspNetCoreMvc_eTicaret_MovieSales.Entities;
 using AspNetCoreMvc_eTicaret_MovieSales.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace AspNetCoreMvc_eTicaret_MovieSales.Repositories
 {
@@ -9,7 +8,7 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Repositories
     {
         private readonly MovieDbContext _context;
 
-        public MovieRepository(MovieDbContext context)
+        public MovieRepository(MovieDbContext context)   //DI Container'dan nesne istiyoruz.
         {
             _context = context;
         }
@@ -21,29 +20,25 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Repositories
         {
             return _context.Movies.Find(id);
         }
-
         public void Add(Movie movie)
         {
-            _context.Movies.Add(movie);
-            _context.SaveChanges();
+            _context.Movies.Add(movie);     //ara katmana ekler.
+            _context.SaveChanges();         //veritabanına ekler.
         }
-
         public void Delete(int id)
         {
-            _context.Movies.Remove(Get(id));
-            _context.SaveChanges();
+            _context.Movies.Remove(Get(id));    //Önce id'den nesneyi buluyor, ardından siliyor.
+            _context.SaveChanges();             //veritabanından siler.
         }
-
-        public void DeleteAll(Movie movie)
+        public void Delete(Movie movie)
         {
-            _context.Movies.Remove(movie);
+            _context.Movies.Remove(movie);      //Doğrudan nesneyi ara katmandan siliyor.
             _context.SaveChanges();
         }
-
         public void Update(Movie movie)
         {
-            _context.Movies.Update(movie);
-            _context.SaveChanges();
+            _context.Movies.Update(movie);      //Verilen nesneyi ara katmanda günceller.
+            _context.SaveChanges();             //veritabanı güncellenir.
         }
     }
 }

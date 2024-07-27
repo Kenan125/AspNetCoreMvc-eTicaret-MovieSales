@@ -8,7 +8,7 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Repositories
     {
         private readonly MovieDbContext _context;
 
-        public GenreRepository(MovieDbContext context)
+        public GenreRepository(MovieDbContext context)   //DI Container'dan nesne istiyoruz.
         {
             _context = context;
         }
@@ -20,29 +20,27 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Repositories
         {
             return _context.Genres.Find(id);
         }
-
         public void Add(Genre genre)
         {
-            _context.Genres.Add(genre);
-            _context.SaveChanges();
+            _context.Genres.Add(genre);     //ara katmana ekler.
+            _context.SaveChanges();         //veritabanına ekler.
         }
 
         public void Delete(int id)
         {
-            _context.Genres.Remove(Get(id));
-            _context.SaveChanges();
+            _context.Genres.Remove(Get(id));    //Önce id'den nesneyi buluyor, ardından siliyor.
+            _context.SaveChanges();             //veritabanından siler.
         }
 
-        public void DeleteAll(Genre genre)
+        public void Delete(Genre genre)
         {
-            _context.Genres.Remove(genre);
+            _context.Genres.Remove(genre);      //Doğrudan nesneyi ara katmandan siliyor.
             _context.SaveChanges();
         }
-
         public void Update(Genre genre)
         {
-            _context.Genres.Update(genre);
-            _context.SaveChanges();
+            _context.Genres.Update(genre);      //Verilen nesneyi ara katmanda günceller.
+            _context.SaveChanges();             //veritabanı güncellenir.
         }
     }
 }

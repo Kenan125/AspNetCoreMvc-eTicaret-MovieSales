@@ -6,9 +6,10 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Interfaces
     {
         public List<Movie> GetAll();
         public Movie Get(int id);
+
         public void Add(Movie movie);
         public void Update(Movie movie);
         public void Delete(int id);
-        public void DeleteAll(Movie movie);
+        public void Delete(Movie movie);
     }
 }
