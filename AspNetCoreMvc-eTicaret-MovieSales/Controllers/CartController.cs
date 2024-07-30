@@ -18,7 +18,11 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Controllers
         CartItem cartItem = new CartItem();           //siparis
         public IActionResult Index()
         {
-            return View();
+            cart = GetCart();  //Session'dan sepeti alıyoruz.
+            TempData["ToplamAdet"] = cartItem.TotalQuantity(cart);
+            if (cartItem.TotalPrice(cart) > 0)
+                TempData["ToplamTutar"] = cartItem.TotalPrice(cart);
+            return View(cart);
         }
         public IActionResult Add(int id, int Adet) 
         {
@@ -32,6 +36,17 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Controllers
             SetCart(cart);
             return RedirectToAction("Index");
         }
+        public IActionResult Delete(int id,int movieId) 
+        {
+            var movie =_movieRepo.Get(id);
+            cart = GetCart();
+            cartItem.MovieId = movieId;
+            
+
+            cartItem.DeleteFromCart(cart, movieId );
+            return RedirectToAction("Index");
+        
+        }
         public void SetCart(List<CartItem> sepet) //sepet kayit (json formatta)
         {
             HttpContext.Session.SetJson("sepet", sepet);
@@ -42,5 +57,10 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Controllers
             //ilk basta sepet olmadigindan sepet null gelir bize bos sepet dondurur
             return sepet;
         }
+        public IActionResult DeleteCart()
+        {
+            HttpContext.Session.Remove("sepet"); //Oturumda bulunan tum sessionlari siler. \_o.o_/
+            return RedirectToAction("Index");
+        }                                                          
     }
 }
