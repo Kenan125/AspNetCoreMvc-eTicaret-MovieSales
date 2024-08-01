@@ -1,5 +1,6 @@
 ﻿using AspNetCoreMvc_eTicaret_MovieSales.Entities;
 using Microsoft.EntityFrameworkCore;
+using AspNetCoreMvc_eTicaret_MovieSales.ViewModels;
 
 namespace AspNetCoreMvc_eTicaret_MovieSales.Data
 {
@@ -54,5 +55,6 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Data
 
             base.OnModelCreating(modelBuilder);
         }
+        public DbSet<AspNetCoreMvc_eTicaret_MovieSales.ViewModels.GenreViewModel> GenreViewModel { get; set; } = default!;
     }
 }

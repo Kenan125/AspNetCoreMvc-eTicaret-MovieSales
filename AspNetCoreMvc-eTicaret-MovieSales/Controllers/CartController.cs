@@ -36,14 +36,14 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Controllers
             SetCart(cart);
             return RedirectToAction("Index");
         }
-        public IActionResult Delete(int id,int movieId) 
+        public IActionResult Delete(int id) 
         {
             var movie =_movieRepo.Get(id);
             cart = GetCart();
-            cartItem.MovieId = movieId;
-            
+            cart = cartItem.DeleteFromCart(cart,id);
 
-            cartItem.DeleteFromCart(cart, movieId );
+            SetCart(cart);
+            
             return RedirectToAction("Index");
         
         }
