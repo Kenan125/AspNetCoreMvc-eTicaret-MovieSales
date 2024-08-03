@@ -1,19 +1,17 @@
 ﻿@model CustomerViewModel
 
 @{
-    ViewData["Title"] = "ConfirmAddress";
+    ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_LayoutMovie.cshtml";
 }
 
-<h3>Adres Onay</h3>
+<h2>Register</h2>
 
 <hr />
 <div class="row">
-    <div class="col-md-6">
-        <form asp-action="ConfirmAddress" method="post">
+    <div class="col-md-4">
+        <form asp-action="Register" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="Password" />
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -25,6 +23,11 @@
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Phone" class="control-label"></label>
                 <input asp-for="Phone" class="form-control" />
                 <span asp-validation-for="Phone" class="text-danger"></span>
@@ -34,8 +37,8 @@
                 <input asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
-            <div class="form-group mt-2">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

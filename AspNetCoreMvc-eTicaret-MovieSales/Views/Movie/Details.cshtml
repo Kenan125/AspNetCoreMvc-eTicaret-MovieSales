@@ -4,45 +4,41 @@
     Layout = "~/Views/Shared/_LayoutMovie.cshtml";
 }
 
-<h1>Details</h1>
 <div class="row">
-    
-        
-            <div class="card mb-3 bg-secondary bg-opacity-25">
-                <div class="card-header text-center">
-                    <h5 class="card-title">@Model.Name</h5>
-                </div>
-                <div class="row">
-                    <div class="col-6">
-                    <img src="@Model.ImageUrl" class="card-img-top" title="@Model.Name" alt="@Model.Name" />
+        <div class="card mb-3 bg-secondary bg-opacity-25 ">
+            <div class="card-header text-center">
+                <h3 class="card-title">@Model.Name</h3>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                <img src="@Model.ImageUrl" class="card-img-top" title="@Model.Name" alt="@Model.Name" height="460px" />
                 </div>
                 <div class="col-6">
                     <div class="card-body">
-                        <p class="fs-5"><b>Yönetmen: </b>@Model.Director </p>
-                        <p class="fs-5"> <b>Oyuncular: </b>@Model.Cast</p>
-                        <p class="fs-5"><b>Özet: </b>@Model.Summary</p>
-                        <p class="fs-5">Son derece heyecanl; bir film. Özellikle harika bir finali var.</p>
+                        <p class="fs-5"><b>Yönetmen : </b> @Model.Director</p>
+                        <p class="fs-5"><b>Oyuncular : </b> @Model.Cast</p>
+                        <p class="fs-5"><b>Özet : </b> @Model.Summary</p>
+                        <p class="fs-5">Son derece heyecanlı bir film. Özellikle harika bir finali var.</p>
                     </div>
                 </div>
-            </div>                
-                <div class="card-footer text-center">
-                    <form asp-controller="Cart" asp-action="Add" method="get">
-                        <input type="hidden" name="Id" value="@Model.Id" />
+            </div>
+            <div class="card-footer text-center">
+            <form asp-controller="Cart" asp-action="Add" method="get">
+                <input type="hidden" name="Id" value="@Model.Id" />
                 <span class="card-text">@string.Format("{0:C2}", @Model.Price)</span>
                 <input name="Adet" class="text-center mx-4" type="number" value="1" min="1" max="@Model.Stock" />
-                    <button type="submit" class="btn btn-primary">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
-                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0" />
-                        </svg> sepete at
-
-                    </button>
+                <button type="submit" class="btn btn-primary">
+                    Sepete at
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                        <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0" />
+                    </svg>
+                </button>
             </form>
-                </div>
             </div>
-        
-    
+        </div>
 </div>
 
-@section GenreMenu{
+@section GenreMenu {
     @await Component.InvokeAsync("Genre")
 }
+

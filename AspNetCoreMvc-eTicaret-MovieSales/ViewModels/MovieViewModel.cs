@@ -14,6 +14,5 @@
         public bool IsLocal { get; set; }  //Yerli-Yabancı
         public bool IsPopuler { get; set; }
         public int GenreId { get; set; }
-        //public string Details { get; set; }
     }
 }

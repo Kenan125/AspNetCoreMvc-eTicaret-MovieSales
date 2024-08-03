@@ -22,8 +22,13 @@
                 <input asp-for="Password" type="password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="text-center">
+            <div class="form-group my-3">
                 <input type="submit" value="Login" class="btn btn-primary" />
+            </div>
+            <div class="form-group">
+                <input type="submit" asp-action="Register" asp-controller="Customer" value="Register" class="btn btn-primary" />
+            </div>
             </div>
         </form>
     </div>

@@ -14,53 +14,56 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Controllers
             _movieRepo = movieRepo;
         }
 
-        List<CartItem> cart = new List<CartItem>();   //sepet
-        CartItem cartItem = new CartItem();           //siparis
-        public IActionResult Index()
-        {
+        List<CartItem> cart = new List<CartItem>();     //sepet
+        CartItem cartItem = new CartItem();             //sipariş
+        public IActionResult Index()    //sepeti görüntüler.
+        {            
             cart = GetCart();  //Session'dan sepeti alıyoruz.
             TempData["ToplamAdet"] = cartItem.TotalQuantity(cart);
-            if (cartItem.TotalPrice(cart) > 0)
+            if(cartItem.TotalPrice(cart) > 0)
                 TempData["ToplamTutar"] = cartItem.TotalPrice(cart);
             return View(cart);
         }
-        public IActionResult Add(int id, int Adet) 
+        public IActionResult Add(int Id, int Adet)
         {
-            var movie = _movieRepo.Get(id); //siparis edilecek movie
-            cart = GetCart();               //sepetimi istiyorum (ilk olarak bos sepet)
-            cartItem.MovieId = movie.Id;    //siparis olusturuyoruz
+            var movie = _movieRepo.Get(Id);  //sipariş edilecek movie
+
+            cart = GetCart();               //sepetimi istiyorum (ilk olarak boş sepet)
+
+            cartItem.MovieId = movie.Id;    //sipariş oluşturuyoruz.
             cartItem.MovieName = movie.Name;
             cartItem.MovieQuantity = Adet;
-            cartItem.MoviePrice=movie.Price;
-            cartItem.AddToCart(cart, cartItem);
-            SetCart(cart);
-            return RedirectToAction("Index");
-        }
-        public IActionResult Delete(int id) 
-        {
-            var movie =_movieRepo.Get(id);
-            cart = GetCart();
-            cart = cartItem.DeleteFromCart(cart,id);
+            cartItem.MoviePrice = movie.Price;
+
+            cart = cartItem.AddToCart(cart, cartItem); //yeni siparişi sepete ekliyoruz.
 
             SetCart(cart);
-            
+
             return RedirectToAction("Index");
-        
+
         }
-        public void SetCart(List<CartItem> sepet) //sepet kayit (json formatta)
+        public IActionResult Delete(int id)
         {
-            HttpContext.Session.SetJson("sepet", sepet);
+            cart = GetCart();
+            cart = cartItem.DeleteFromCart(cart, id);
+            SetCart(cart);      //session'a sepetin son halini kayıt ediyoruz.
+            return RedirectToAction("Index");
         }
-        public List<CartItem> GetCart() //kayitli sepeti  getir. (text formatta)
+        public void SetCart(List<CartItem> sepet)   //sepet kayıt (json formatta) eder.
+        {
+            HttpContext.Session.SetJson("sepet", sepet);    //alışveriş sepetimizi sepet isimli (key) session'a kayıt ediyoruz.
+        }
+        public List<CartItem> GetCart()     //kayıtlı sepeti (text formatta) getirir.
         {
             var sepet = HttpContext.Session.GetJson<List<CartItem>>("sepet") ?? new List<CartItem>();
-            //ilk basta sepet olmadigindan sepet null gelir bize bos sepet dondurur
+            //?? -> ilk başta sepet olmadığından null gelir, bize boş bir sepet döndürür.
             return sepet;
         }
         public IActionResult DeleteCart()
         {
-            HttpContext.Session.Remove("sepet"); //Oturumda bulunan tum sessionlari siler. \_o.o_/
+            //HttpContext.Session.Clear(); //Oturumda bulunan tüm session'ları siler.
+            HttpContext.Session.Remove("sepet"); //Sadece adı sepet olan session'ı siler.
             return RedirectToAction("Index");
-        }                                                          
+        }
     }
 }

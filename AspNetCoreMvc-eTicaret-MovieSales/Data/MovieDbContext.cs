@@ -4,7 +4,7 @@ using AspNetCoreMvc_eTicaret_MovieSales.ViewModels;
 
 namespace AspNetCoreMvc_eTicaret_MovieSales.Data
 {
-    public class MovieDbContext : DbContext
+    public class MovieDbContext : DbContext     //veritabanı
     {
         public MovieDbContext(DbContextOptions<MovieDbContext> options) : base(options) { }
 
@@ -55,6 +55,6 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Data
 
             base.OnModelCreating(modelBuilder);
         }
-        public DbSet<AspNetCoreMvc_eTicaret_MovieSales.ViewModels.GenreViewModel> GenreViewModel { get; set; } = default!;
+        public DbSet<AspNetCoreMvc_eTicaret_MovieSales.ViewModels.CustomerViewModel> CustomerViewModel { get; set; } = default!;
     }
 }

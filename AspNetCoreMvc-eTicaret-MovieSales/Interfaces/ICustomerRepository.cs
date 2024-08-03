@@ -7,9 +7,9 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Interfaces
         public List<Customer> GetAll();
         public Customer Get(int id);
 
-        public void Add(Customer movie);
-        public void Update(Customer movie);
+        public void Add(Customer customer);
+        public void Update(Customer customer);
         public void Delete(int id);
-        public void Delete(Customer movie);
+        public void Delete(Customer customer);
     }
 }
