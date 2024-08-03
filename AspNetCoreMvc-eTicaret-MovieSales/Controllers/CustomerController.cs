@@ -12,15 +12,17 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Controllers
     {
         private readonly ICustomerRepository _customerRepo;
         private readonly IMovieSaleRepository _movieSaleRepo;
+        IMovieSaleDetailRepository _movieSaleDetailRepo;
         private readonly IMapper _mapper;
 
         List<CartItem> cart = new List<CartItem>();
         CartItem cartItem = new CartItem();
-        public CustomerController(ICustomerRepository customerRepo, IMapper mapper, IMovieSaleRepository movieSaleRepo) //DI container
+        public CustomerController(ICustomerRepository customerRepo, IMapper mapper, IMovieSaleRepository movieSaleRepo, IMovieSaleDetailRepository movieSaleDetailRepo) //DI container
         {
             _customerRepo = customerRepo;
             _mapper = mapper;
             _movieSaleRepo = movieSaleRepo;
+            _movieSaleDetailRepo = movieSaleDetailRepo;
         }
         public IActionResult Index()
         {
@@ -97,8 +99,19 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.Controllers
         {
             //MovieSale nesnesi veritabanına kayıt edilerek sql'in vereceği Id bilgisi elde edilecek.
             var satisId = _movieSaleRepo.AddSale(_mapper.Map<MovieSale>(model.movieSaleViewModel));
+            cart = HttpContext.Session.GetJson<List<CartItem>>("sepet");
 
-            return View();
+            if(_movieSaleDetailRepo.AddRange(cart, satisId))
+            {
+                TempData["mesaj"] = "Satış işlemi başarıyla tamamlandı";
+                HttpContext.Session.Remove("sepet");
+            }
+            else
+            {
+                TempData["mesaj"] = "Satış işlemi gerçekleşmedi, bilgilerinizi kontrol edin.";
+
+            }
+            return View("MessageShow");
         }
         public IActionResult Register()
         {
