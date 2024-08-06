@@ -17,6 +17,8 @@ namespace AspNetCoreMvc_eTicaret_MovieSales.ViewComponents
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
+            //ViewBag.Action = HttpContext.Request.Query;
+            ViewBag.SelectedGenreId = RouteData?.Values["id"];
             var genres = _genreRepo.GetAll();
             return View(_mapper.Map<List<GenreViewModel>>(genres));
         }
